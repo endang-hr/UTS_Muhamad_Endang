@@ -189,7 +189,7 @@ nav.main-nav a.btn-nav-cta:hover {
   padding: 85px 0 95px;
   background: 
     linear-gradient(120deg, rgba(11, 19, 41, 0.90) 0%, rgba(11, 19, 41, 0.74) 48%, rgba(11, 19, 41, 0.40) 100%),
-    url('banner-hero.png') center center / cover no-repeat;
+    url('images/banner-hero.png') center center / cover no-repeat;
   color: #ffffff;
   border-bottom: 1px solid rgba(56, 189, 248, 0.2);
 }

@@ -1,0 +1,846 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Presentasi UTS Pemrograman Web 1 - Muhamad Endang</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Fira+Code:wght@400;500;600&display=swap');
+
+    @page {
+      size: A4 portrait;
+      margin: 12mm 15mm 12mm 15mm;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      color: #1e293b;
+      background-color: #ffffff;
+      line-height: 1.5;
+      font-size: 10pt;
+    }
+
+    .page {
+      background: #ffffff;
+      padding: 0;
+      page-break-after: always;
+      page-break-inside: avoid;
+      height: 270mm;
+      max-height: 270mm;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      box-sizing: border-box;
+    }
+
+    .page:last-child {
+      page-break-after: auto;
+    }
+
+    .page-content {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Header & Footer on each page */
+    .doc-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 2px solid #0b1329;
+      padding-bottom: 8px;
+      margin-bottom: 16px;
+    }
+
+    .doc-header .left-meta {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .doc-header img {
+      width: 36px;
+      height: 36px;
+      object-fit: contain;
+    }
+
+    .doc-header .brand-title {
+      font-size: 11pt;
+      font-weight: 800;
+      color: #0b1329;
+      letter-spacing: 0.5px;
+    }
+
+    .doc-header .brand-sub {
+      font-size: 8.5pt;
+      color: #64748b;
+      font-weight: 600;
+    }
+
+    .doc-header .slide-badge {
+      background: #0b1329;
+      color: #38bdf8;
+      font-size: 9pt;
+      font-weight: 700;
+      padding: 4px 12px;
+      border-radius: 16px;
+      letter-spacing: 0.5px;
+    }
+
+    /* Cover Styling */
+    .cover-container {
+      text-align: center;
+      padding: 30px 10px 20px;
+    }
+
+    .cover-logo {
+      width: 105px;
+      height: 105px;
+      object-fit: contain;
+      margin-bottom: 16px;
+      filter: drop-shadow(0 6px 14px rgba(11,19,41,0.15));
+    }
+
+    .cover-title {
+      font-size: 22pt;
+      font-weight: 800;
+      color: #0b1329;
+      margin-bottom: 6px;
+      text-transform: uppercase;
+      letter-spacing: -0.5px;
+      line-height: 1.25;
+    }
+
+    .cover-subtitle {
+      font-size: 13pt;
+      color: #2563eb;
+      font-weight: 700;
+      margin-bottom: 20px;
+    }
+
+    .divider {
+      width: 80px;
+      height: 4px;
+      background: linear-gradient(90deg, #2563eb, #38bdf8);
+      margin: 0 auto 24px;
+      border-radius: 2px;
+    }
+
+    .meta-box {
+      background: #f8fafc;
+      border: 1.5px solid #cbd5e1;
+      border-radius: 12px;
+      padding: 16px 24px;
+      display: inline-block;
+      text-align: left;
+      margin-bottom: 20px;
+      min-width: 440px;
+    }
+
+    .meta-box table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 10pt;
+    }
+
+    .meta-box td {
+      padding: 5px 8px;
+    }
+
+    .meta-box td:first-child {
+      font-weight: 700;
+      color: #475569;
+      width: 140px;
+    }
+
+    .meta-box td:last-child {
+      color: #0f172a;
+      font-weight: 600;
+    }
+
+    /* Section & Content Blocks */
+    h2.slide-heading {
+      font-size: 14.5pt;
+      font-weight: 800;
+      color: #0b1329;
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    h2.slide-heading span.num {
+      background: #2563eb;
+      color: #ffffff;
+      width: 26px;
+      height: 26px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 6px;
+      font-size: 10.5pt;
+    }
+
+    .slide-card {
+      background: #ffffff;
+      border: 1.5px solid #e2e8f0;
+      border-radius: 10px;
+      padding: 14px 18px;
+      margin-bottom: 12px;
+    }
+
+    .slide-card.highlight {
+      background: #f8fafc;
+      border-left: 5px solid #2563eb;
+    }
+
+    .card-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+
+    .mini-card {
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 10px;
+      padding: 12px 16px;
+    }
+
+    .mini-card h4 {
+      font-size: 10.5pt;
+      font-weight: 700;
+      color: #0b1329;
+      margin-bottom: 5px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .mini-card p {
+      font-size: 9pt;
+      color: #475569;
+      line-height: 1.45;
+    }
+
+    /* Code pill */
+    .code-box {
+      background: #0b1329;
+      color: #e2e8f0;
+      font-family: 'Fira Code', monospace;
+      font-size: 8.5pt;
+      padding: 8px 12px;
+      border-radius: 6px;
+      margin-top: 6px;
+      line-height: 1.4;
+      border: 1px solid #1e293b;
+    }
+
+    .code-box span.hl-prop { color: #38bdf8; }
+    .code-box span.hl-val { color: #facc15; }
+    .code-box span.hl-sel { color: #ec4899; }
+
+    /* Naskah Presentasi Box */
+    .speech-box {
+      background: #eff6ff;
+      border: 1.5px solid #93c5fd;
+      border-radius: 10px;
+      padding: 14px 18px;
+      margin-top: auto;
+      margin-bottom: 10px;
+    }
+
+    .speech-box .speech-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: #2563eb;
+      color: #ffffff;
+      font-size: 8.5pt;
+      font-weight: 700;
+      padding: 3px 10px;
+      border-radius: 12px;
+      margin-bottom: 8px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .speech-box p {
+      font-size: 9.5pt;
+      color: #1e3a8a;
+      font-style: italic;
+      line-height: 1.55;
+    }
+
+    /* Tag Badges */
+    .tag-badge {
+      display: inline-block;
+      font-family: 'Fira Code', monospace;
+      font-size: 8pt;
+      background: #0b1329;
+      color: #38bdf8;
+      padding: 2px 6px;
+      border-radius: 5px;
+      margin: 1px 2px 1px 0;
+    }
+
+    .tag-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 9pt;
+      margin-top: 6px;
+      border-radius: 8px;
+      overflow: hidden;
+      border: 1px solid #cbd5e1;
+    }
+
+    .tag-table th {
+      background: #0b1329;
+      color: #ffffff;
+      padding: 8px 10px;
+      text-align: left;
+      font-weight: 700;
+      font-size: 9pt;
+    }
+
+    .tag-table td {
+      padding: 6px 10px;
+      border-bottom: 1px solid #e2e8f0;
+      vertical-align: top;
+    }
+
+    .tag-table tr:nth-child(even) td {
+      background: #f8fafc;
+    }
+
+    .doc-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 10px;
+      border-top: 1px solid #cbd5e1;
+      font-size: 8.5pt;
+      color: #64748b;
+      margin-top: 8px;
+    }
+
+    .link-pill {
+      display: inline-block;
+      background: #e0f2fe;
+      color: #0369a1;
+      padding: 2px 8px;
+      border-radius: 10px;
+      font-size: 8.5pt;
+      font-family: 'Fira Code', monospace;
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    .feature-stat-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+
+    .stat-card {
+      background: #f1f5f9;
+      border: 1px solid #cbd5e1;
+      border-radius: 8px;
+      padding: 10px;
+      text-align: center;
+    }
+
+    .stat-card .val {
+      font-size: 14pt;
+      font-weight: 800;
+      color: #2563eb;
+    }
+
+    .stat-card .lbl {
+      font-size: 8pt;
+      color: #475569;
+      font-weight: 600;
+      text-transform: uppercase;
+      margin-top: 2px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ==================== HALAMAN 1: COVER & PEMBUKA ==================== -->
+  <div class="page">
+    <div class="page-content">
+      <div class="doc-header">
+        <div class="left-meta">
+          <img src="images/Logo Endang Microtech.png" alt="Logo">
+          <div>
+            <div class="brand-title">UNIVERSITAS PAMULANG</div>
+            <div class="brand-sub">Fakultas Ilmu Komputer - Program Studi Sistem Informasi</div>
+          </div>
+        </div>
+        <div class="slide-badge">COVER PRESENTASI</div>
+      </div>
+
+      <div class="cover-container">
+        <img src="images/Logo Endang Microtech.png" alt="Logo Endang Microtech" class="cover-logo">
+        <h1 class="cover-title">PRESENTASI TUGAS UTS<br>PEMROGRAMAN WEB 1</h1>
+        <div class="cover-subtitle">Website Profil Usaha & Layanan: Endang Microtech</div>
+        <div class="divider"></div>
+
+        <div class="meta-box">
+          <table>
+            <tr>
+              <td>Nama Mahasiswa</td>
+              <td>: <strong>Muhamad Endang</strong></td>
+            </tr>
+            <tr>
+              <td>Mata Kuliah</td>
+              <td>: Pemrograman Web 1 (Semester V)</td>
+            </tr>
+            <tr>
+              <td>Program Studi</td>
+              <td>: Sistem Informasi</td>
+            </tr>
+            <tr>
+              <td>Perguruan Tinggi</td>
+              <td>: Universitas Pamulang (UNPAM)</td>
+            </tr>
+            <tr>
+              <td>Topik Proyek</td>
+              <td>: Website Profil UMKM & Tabel Tarif Jasa IT</td>
+            </tr>
+            <tr>
+              <td>Repository GitHub</td>
+              <td>: <span class="link-pill">github.com/endang-hr/UTS_Muhamad_Endang</span></td>
+            </tr>
+            <tr>
+              <td>Website Live</td>
+              <td>: <span class="link-pill">https://endang-hr.github.io/UTS_Muhamad_Endang/</span></td>
+            </tr>
+          </table>
+        </div>
+      </div>
+
+      <div class="speech-box">
+        <div class="speech-label">🎤 Naskah Pembuka (Ucapkan di Awal Presentasi)</div>
+        <p>
+          "<strong>Bismillahirrohmanirrohim. Assalamu’alaikum Warahmatullahi Wabarakatuh.</strong><br>
+          Selamat pagi/siang kepada Bapak/Ibu Dosen pengampu mata kuliah Pemrograman Web 1 serta rekan-rekan mahasiswa yang saya banggakan.<br>
+          Perkenalkan, nama saya <strong>Muhamad Endang</strong>, mahasiswa Program Studi Sistem Informasi, Universitas Pamulang.<br>
+          Pada kesempatan hari ini, saya akan mempresentasikan hasil proyek Ujian Tengah Semester (UTS) saya, yaitu perancangan dan pembangunan <strong>Website Profil Usaha 'Endang Microtech'</strong> yang dibangun menggunakan HTML5 Semantik dan Vanilla CSS murni, serta telah berhasil di-deploy secara online melalui GitHub Pages. Izinkan saya memaparkan latar belakang proyek, struktur arsitektur halaman, tag HTML yang digunakan, hingga teknik styling yang diterapkan."
+        </p>
+      </div>
+    </div>
+
+    <div class="doc-footer">
+      <span>UTS Pemrograman Web 1 - Muhamad Endang (Sistem Informasi UNPAM)</span>
+      <span>Halaman 1 dari 6</span>
+    </div>
+  </div>
+
+  <!-- ==================== HALAMAN 2: PENJELASAN WEBSITE & LATAR BELAKANG ==================== -->
+  <div class="page">
+    <div class="page-content">
+      <div class="doc-header">
+        <div class="left-meta">
+          <img src="images/Logo Endang Microtech.png" alt="Logo">
+          <div>
+            <div class="brand-title">BAGIAN 1: PENJELASAN WEBSITE</div>
+            <div class="brand-sub">Latar Belakang Usaha, Tujuan & Arsitektur Sistem</div>
+          </div>
+        </div>
+        <div class="slide-badge">SLIDE 01</div>
+      </div>
+
+      <h2 class="slide-heading"><span class="num">1</span> Latar Belakang & Profil Endang Microtech</h2>
+
+      <div class="feature-stat-grid">
+        <div class="stat-card">
+          <div class="val">3</div>
+          <div class="lbl">Halaman Terpadu</div>
+        </div>
+        <div class="stat-card">
+          <div class="val">100%</div>
+          <div class="lbl">Semantic HTML5</div>
+        </div>
+        <div class="stat-card">
+          <div class="val">Pure CSS</div>
+          <div class="lbl">Tanpa Framework</div>
+        </div>
+        <div class="stat-card">
+          <div class="val">Live</div>
+          <div class="lbl">GitHub Pages</div>
+        </div>
+      </div>
+
+      <div class="slide-card highlight">
+        <h3 style="color: #0b1329; font-size: 11pt; margin-bottom: 5px;">Tentang Usaha Endang Microtech</h3>
+        <p style="font-size: 9.5pt; color: #475569; line-height: 1.5;">
+          <strong>Endang Microtech</strong> adalah usaha mikro di bidang jasa teknologi dan reparasi perangkat digital yang berlokasi di <em>Kp. Gardu, Ds. Majasari, Kec. Jawilan, Kab. Serang, Banten</em>. Usaha ini melayani kebutuhan masyarakat sekitar maupun pelaku UMKM dalam servis laptop/PC, instalasi ulang sistem operasi Windows & Linux, perakitan komputer spek kerja/gaming, instalasi jaringan WiFi/LAN, servis printer, pasang CCTV, hingga pembuatan website bisnis.
+        </p>
+      </div>
+
+      <div class="card-grid">
+        <div class="mini-card">
+          <h4>🎯 Tujuan Pembangunan Website</h4>
+          <p>Membangun profil digital terpercaya, menghadirkan transparansi harga melalui tabel bergaris, dan menyediakan saluran komunikasi cepat via WhatsApp dan Form Konsultasi.</p>
+        </div>
+        <div class="mini-card">
+          <h4>📂 Arsitektur Multi-Page (3 Halaman)</h4>
+          <p>1. <strong>index.html</strong> : Beranda, banner hero visual & profil keunggulan.<br>
+             2. <strong>layanan.html</strong> : Katalog servis & Tabel Estimasi Biaya/Garansi.<br>
+             3. <strong>kontak.html</strong> : Alamat resmi, peta lokasi & form pesan.</p>
+        </div>
+      </div>
+
+      <div class="speech-box">
+        <div class="speech-label">🎤 Naskah Presentasi (Penjelasan Website)</div>
+        <p>
+          "Website yang saya bangun ini bernama <strong>Endang Microtech</strong>. Latar belakang pembuatan website ini berawal dari kebutuhan usaha jasa servis komputer dan solusi IT lokal di daerah Jawilan, Serang - Banten agar memiliki kehadiran digital yang profesional dan kredibel.<br><br>
+          Website ini dirancang secara <strong>multi-page</strong> dengan 3 halaman utama: Halaman pertama adalah <em>Beranda</em> yang menampilkan profil keunggulan kami; halaman kedua adalah <em>Layanan & Tarif</em> yang menyajikan rincian biaya servis dalam format tabel terstruktur sesuai instruksi tugas UTS; dan halaman ketiga adalah <em>Kontak</em> untuk mempermudah calon pelanggan melakukan konsultasi servis melalui WhatsApp, email, maupun formulir pesan."
+        </p>
+      </div>
+    </div>
+
+    <div class="doc-footer">
+      <span>UTS Pemrograman Web 1 - Muhamad Endang (Sistem Informasi UNPAM)</span>
+      <span>Halaman 2 dari 6</span>
+    </div>
+  </div>
+
+  <!-- ==================== HALAMAN 3: TAG HTML DASAR & SEMANTIC ==================== -->
+  <div class="page">
+    <div class="page-content">
+      <div class="doc-header">
+        <div class="left-meta">
+          <img src="images/Logo Endang Microtech.png" alt="Logo">
+          <div>
+            <div class="brand-title">BAGIAN 2: TAG HTML YANG DIGUNAKAN</div>
+            <div class="brand-sub">Tag Dasar, HTML5 Semantic, Tabel & Form</div>
+          </div>
+        </div>
+        <div class="slide-badge">SLIDE 02</div>
+      </div>
+
+      <h2 class="slide-heading"><span class="num">2</span> Analisis Tag HTML yang Digunakan</h2>
+
+      <table class="tag-table">
+        <thead>
+          <tr>
+            <th style="width: 25%;">Kategori Tag</th>
+            <th style="width: 33%;">Tag yang Digunakan</th>
+            <th style="width: 42%;">Fungsi & Penerapan pada Proyek</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>1. Struktur Dasar</strong></td>
+            <td>
+              <span class="tag-badge">&lt;!DOCTYPE html&gt;</span>
+              <span class="tag-badge">&lt;html&gt;</span>
+              <span class="tag-badge">&lt;head&gt;</span>
+              <span class="tag-badge">&lt;meta&gt;</span>
+              <span class="tag-badge">&lt;title&gt;</span>
+              <span class="tag-badge">&lt;body&gt;</span>
+            </td>
+            <td>Fondasi standar HTML5, viewport layar mobile responsif, judul tab browser, serta pembungkus konten utama.</td>
+          </tr>
+          <tr>
+            <td><strong>2. HTML5 Semantic</strong></td>
+            <td>
+              <span class="tag-badge">&lt;header&gt;</span>
+              <span class="tag-badge">&lt;nav&gt;</span>
+              <span class="tag-badge">&lt;main&gt;</span>
+              <span class="tag-badge">&lt;section&gt;</span>
+              <span class="tag-badge">&lt;article&gt;</span>
+              <span class="tag-badge">&lt;footer&gt;</span>
+            </td>
+            <td>Memberikan struktur logis yang bermakna bagi browser & SEO. Memisahkan header, nav, section, artikel mandiri, dan footer.</td>
+          </tr>
+          <tr>
+            <td><strong>3. Heading & Konten</strong></td>
+            <td>
+              <span class="tag-badge">&lt;h1&gt; s/d &lt;h4&gt;</span>
+              <span class="tag-badge">&lt;p&gt;</span>
+              <span class="tag-badge">&lt;strong&gt;</span>
+              <span class="tag-badge">&lt;span&gt;</span>
+              <span class="tag-badge">&lt;ul&gt;</span>
+              <span class="tag-badge">&lt;li&gt;</span>
+            </td>
+            <td>Hirarki judul tertata rapi (&lt;h1&gt; nama brand, &lt;h2&gt; judul section), paragraf deskripsi, teks tebal penekanan, dan list fitur.</td>
+          </tr>
+          <tr>
+            <td><strong>4. Multimedia & Link</strong></td>
+            <td>
+              <span class="tag-badge">&lt;img&gt;</span>
+              <span class="tag-badge">&lt;a href="..."&gt;</span>
+            </td>
+            <td>Menampilkan logo dan foto banner dari folder <code>images/</code>, serta navigasi hyperlink antarhalaman dan direct chat WhatsApp.</td>
+          </tr>
+          <tr>
+            <td><strong>5. Tabel Terstruktur</strong></td>
+            <td>
+              <span class="tag-badge">&lt;table&gt;</span>
+              <span class="tag-badge">&lt;thead&gt;</span>
+              <span class="tag-badge">&lt;tbody&gt;</span>
+              <span class="tag-badge">&lt;tfoot&gt;</span>
+              <span class="tag-badge">&lt;tr&gt;</span>
+              <span class="tag-badge">&lt;th&gt;</span>
+              <span class="tag-badge">&lt;td&gt;</span>
+            </td>
+            <td>Membangun tabel daftar harga service, estimasi durasi, dan garansi secara rapi sesuai instruksi tugas UTS.</td>
+          </tr>
+          <tr>
+            <td><strong>6. Form Interaktif</strong></td>
+            <td>
+              <span class="tag-badge">&lt;form&gt;</span>
+              <span class="tag-badge">&lt;input&gt;</span>
+              <span class="tag-badge">&lt;select&gt;</span>
+              <span class="tag-badge">&lt;textarea&gt;</span>
+              <span class="tag-badge">&lt;button&gt;</span>
+            </td>
+            <td>Digunakan pada <code>kontak.html</code> untuk sarana pesan konsultasi online calon pelanggan.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="speech-box">
+        <div class="speech-label">🎤 Naskah Presentasi (Penjelasan Tag HTML)</div>
+        <p>
+          "Mengenai tag HTML yang saya gunakan, dalam proyek ini saya menerapkan prinsip <strong>HTML5 Semantic</strong> secara menyeluruh. Saya menggunakan tag semantik seperti <strong>&lt;header&gt;</strong> untuk area atas, <strong>&lt;nav&gt;</strong> untuk menu navigasi, <strong>&lt;main&gt;</strong> dan <strong>&lt;section&gt;</strong> untuk membagi konten, <strong>&lt;article&gt;</strong> untuk setiap kartu layanan, hingga <strong>&lt;footer&gt;</strong> untuk kaki website.<br><br>
+          Untuk memenuhi instruksi tugas UTS, saya menggunakan elemen <strong>&lt;table&gt;, &lt;thead&gt;, &lt;tbody&gt;, &lt;tfoot&gt;, &lt;tr&gt;, &lt;th&gt;, dan &lt;td&gt;</strong> yang menyajikan rincian tarif secara profesional, terstruktur, dan bergaris."
+        </p>
+      </div>
+    </div>
+
+    <div class="doc-footer">
+      <span>UTS Pemrograman Web 1 - Muhamad Endang (Sistem Informasi UNPAM)</span>
+      <span>Halaman 3 dari 6</span>
+    </div>
+  </div>
+
+  <!-- ==================== HALAMAN 4: TEKNIK STYLING DENGAN VANILLA CSS ==================== -->
+  <div class="page">
+    <div class="page-content">
+      <div class="doc-header">
+        <div class="left-meta">
+          <img src="images/Logo Endang Microtech.png" alt="Logo">
+          <div>
+            <div class="brand-title">BAGIAN 3: METODE STYLING WEBSITE</div>
+            <div class="brand-sub">Vanilla CSS, CSS Grid, Flexbox, Variables & Aesthetics</div>
+          </div>
+        </div>
+        <div class="slide-badge">SLIDE 03</div>
+      </div>
+
+      <h2 class="slide-heading"><span class="num">3</span> Bagaimana Saya Memberikan Styling</h2>
+
+      <div class="card-grid">
+        <div class="mini-card">
+          <h4>🎨 1. External CSS & CSS Variables</h4>
+          <p>Dikelola terpusat di <code>style.css</code>. Memanfaatkan <code>:root</code> untuk warna konsisten:</p>
+          <div class="code-box">
+            <span class="hl-sel">:root</span> {<br>
+            &nbsp;&nbsp;<span class="hl-prop">--bg-primary</span>: <span class="hl-val">#0b1329</span>; <span class="hl-prop">--accent-cyan</span>: <span class="hl-val">#38bdf8</span>;<br>
+            &nbsp;&nbsp;<span class="hl-prop">--accent-blue</span>: <span class="hl-val">#2563eb</span>;<br>
+            }
+          </div>
+        </div>
+
+        <div class="mini-card">
+          <h4>📐 2. Layouting: Flexbox & CSS Grid</h4>
+          <p><strong>Flexbox</strong> untuk meratakan navbar & tombol CTA. <strong>CSS Grid</strong> untuk kartu layanan (3 kolom) & footer:</p>
+          <div class="code-box">
+            <span class="hl-sel">.services-grid</span> {<br>
+            &nbsp;&nbsp;<span class="hl-prop">display</span>: <span class="hl-val">grid</span>;<br>
+            &nbsp;&nbsp;<span class="hl-prop">grid-template-columns</span>: <span class="hl-val">repeat(auto-fit, minmax(280px, 1fr))</span>;<br>
+            }
+          </div>
+        </div>
+
+        <div class="mini-card">
+          <h4>✨ 3. Efek Modern & Glassmorphism</h4>
+          <p>Efek kaca buram transparan pada navbar & kartu hero:</p>
+          <div class="code-box">
+            <span class="hl-sel">.hero-card</span> {<br>
+            &nbsp;&nbsp;<span class="hl-prop">background</span>: <span class="hl-val">rgba(255, 255, 255, 0.06)</span>;<br>
+            &nbsp;&nbsp;<span class="hl-prop">backdrop-filter</span>: <span class="hl-val">blur(14px)</span>;<br>
+            }
+          </div>
+        </div>
+
+        <div class="mini-card">
+          <h4>📊 4. Styling Tabel & Zebra Striping</h4>
+          <p>Tabel bergaris profesional dengan pewarnaan selang-seling:</p>
+          <div class="code-box">
+            <span class="hl-sel">table</span> { <span class="hl-prop">border-collapse</span>: <span class="hl-val">collapse</span>; }<br>
+            <span class="hl-sel">tbody tr:nth-child(even)</span> {<br>
+            &nbsp;&nbsp;<span class="hl-prop">background-color</span>: <span class="hl-val">#f8fafc</span>;<br>
+            }
+          </div>
+        </div>
+      </div>
+
+      <div class="slide-card highlight" style="margin-bottom: 8px;">
+        <h4 style="color: #0b1329; font-size: 10pt; margin-bottom: 2px;">📱 5. Responsive Web Design (Media Queries)</h4>
+        <p style="font-size: 8.5pt; color: #475569;">
+          Menggunakan <code>@media (max-width: 768px)</code> dan <code>@media (max-width: 480px)</code> agar tata letak berpindah otomatis menjadi tata letak vertikal yang nyaman di smartphone Android maupun iPhone.
+        </p>
+      </div>
+
+      <div class="speech-box">
+        <div class="speech-label">🎤 Naskah Presentasi (Penjelasan Styling CSS)</div>
+        <p>
+          "Terkait styling, saya menggunakan <strong>Vanilla CSS eksternal</strong> di file <em>style.css</em> tanpa framework pihak ketiga untuk membuktikan penguasaan CSS murni.<br><br>
+          Saya menerapkan <strong>CSS Custom Properties (:root)</strong> untuk tema warna modern, memadukan <strong>Flexbox</strong> pada navigasi dan <strong>CSS Grid</strong> pada kartu layanan dan footer. Saya juga menyematkan efek modern seperti <em>Glassmorphism</em>, <em>zebra striping</em> pada tabel harga, serta <strong>Media Queries</strong> agar tampilan web 100% responsif di layar ponsel maupun laptop."
+        </p>
+      </div>
+    </div>
+
+    <div class="doc-footer">
+      <span>UTS Pemrograman Web 1 - Muhamad Endang (Sistem Informasi UNPAM)</span>
+      <span>Halaman 4 dari 6</span>
+    </div>
+  </div>
+
+  <!-- ==================== HALAMAN 5: DEMO FITUR & STRUKTUR FOLDER ==================== -->
+  <div class="page">
+    <div class="page-content">
+      <div class="doc-header">
+        <div class="left-meta">
+          <img src="images/Logo Endang Microtech.png" alt="Logo">
+          <div>
+            <div class="brand-title">BAGIAN 4: DEMO & STRUKTUR PROJECT</div>
+            <div class="brand-sub">Kerapihan Folder Aset & Publikasi GitHub Pages</div>
+          </div>
+        </div>
+        <div class="slide-badge">SLIDE 04</div>
+      </div>
+
+      <h2 class="slide-heading"><span class="num">4</span> Kerapihan Struktur File & Deployment</h2>
+
+      <div class="card-grid">
+        <div class="mini-card">
+          <h4>📁 Struktur Direktori Bersih</h4>
+          <p style="font-size: 8.5pt; color: #475569; margin-bottom: 4px;">Seluruh foto telah dirapikan ke dalam folder <code>images/</code>:</p>
+          <div class="code-box" style="font-size: 8pt; line-height: 1.35;">
+UTS/<br>
+├── <span style="color:#38bdf8">index.html</span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Halaman Beranda & Profil)<br>
+├── <span style="color:#38bdf8">layanan.html</span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Katalog & Tabel Tarif Jasa)<br>
+├── <span style="color:#38bdf8">kontak.html</span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Informasi Kontak & Form)<br>
+├── <span style="color:#facc15">style.css</span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(File Desain Utama)<br>
+└── <span style="color:#ec4899">images/</span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Folder Khusus Aset Gambar)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;├── Logo Endang Microtech.png<br>
+&nbsp;&nbsp;&nbsp;&nbsp;├── banner-hero.png<br>
+&nbsp;&nbsp;&nbsp;&nbsp;└── banner-beranda.jpg
+          </div>
+        </div>
+
+        <div class="mini-card">
+          <h4>🌐 Akses Online & Deployment</h4>
+          <p style="font-size: 8.5pt; color: #475569; margin-bottom: 6px;">
+            Website telah tersinkronisasi ke GitHub dan aktif di hosting gratis <strong>GitHub Pages</strong>:
+          </p>
+          <div style="background: #ffffff; border: 1px solid #cbd5e1; border-radius: 8px; padding: 10px; margin-top: 4px;">
+            <p style="font-size: 8pt; color: #64748b; font-weight: 700;">REPOSITORY GITHUB:</p>
+            <p style="font-size: 8.5pt; font-family: 'Fira Code', monospace; color: #2563eb; font-weight: 600;">github.com/endang-hr/UTS_Muhamad_Endang</p>
+            <div style="height: 1px; background: #e2e8f0; margin: 6px 0;"></div>
+            <p style="font-size: 8pt; color: #64748b; font-weight: 700;">URL LIVE GITHUB PAGES:</p>
+            <p style="font-size: 8.5pt; font-family: 'Fira Code', monospace; color: #0284c7; font-weight: 600;">endang-hr.github.io/UTS_Muhamad_Endang/</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="slide-card highlight">
+        <h4 style="color: #0b1329; font-size: 10pt; margin-bottom: 4px;">✨ Nilai Unggul Implementasi Proyek</h4>
+        <p style="font-size: 9pt; color: #475569; line-height: 1.5;">
+          • <strong>Folder Gambar Khusus:</strong> Semua aset grafis tersusun rapi di sub-folder <code>images/</code>.<br>
+          • <strong>Direct WhatsApp Hotspot:</strong> Tombol interaktif langsung mengarah ke chat WA <code>0852-1073-855</code>.<br>
+          • <strong>Data Usaha Valid:</strong> Alamat nyata berlokasi di Kp. Gardu Ds. Majasari, Kec. Jawilan, Kab. Serang, Banten.<br>
+          • <strong>Bebas Konfigurasi Editor:</strong> Folder <code>.vscode</code> telah dieliminasi dari workspace agar repo bersih.
+        </p>
+      </div>
+
+      <div class="speech-box">
+        <div class="speech-label">🎤 Naskah Presentasi (Demo & Kerapihan Project)</div>
+        <p>
+          "Dapat kita perhatikan pada struktur file, proyek ini sangat rapi. Seluruh file gambar aset foto telah dikelompokkan ke dalam folder khusus <strong>images/</strong>. Kode HTML dan CSS telah dipisahkan dengan sangat bersih.<br><br>
+          Proyek ini juga sudah saya hubungkan ke GitHub pada repository <em>endang-hr/UTS_Muhamad_Endang</em> dan telah berhasil di-deploy menggunakan <strong>GitHub Pages</strong> sehingga dapat diakses secara publik kapan saja melalui internet. Pada website ini juga terdapat tombol interaktif WhatsApp yang langsung terhubung ke nomor kontak saya untuk konsultasi pelanggan."
+        </p>
+      </div>
+    </div>
+
+    <div class="doc-footer">
+      <span>UTS Pemrograman Web 1 - Muhamad Endang (Sistem Informasi UNPAM)</span>
+      <span>Halaman 5 dari 6</span>
+    </div>
+  </div>
+
+  <!-- ==================== HALAMAN 6: KESIMPULAN & PENUTUP ==================== -->
+  <div class="page">
+    <div class="page-content">
+      <div class="doc-header">
+        <div class="left-meta">
+          <img src="images/Logo Endang Microtech.png" alt="Logo">
+          <div>
+            <div class="brand-title">BAGIAN 5: PENUTUP & SESI TANYA JAWAB</div>
+            <div class="brand-sub">Kesimpulan Capaian UTS & Salam Penutup</div>
+          </div>
+        </div>
+        <div class="slide-badge">SLIDE 05</div>
+      </div>
+
+      <h2 class="slide-heading"><span class="num">5</span> Kesimpulan & Evaluasi Diri</h2>
+
+      <div class="slide-card highlight">
+        <h3 style="color: #0b1329; font-size: 11pt; margin-bottom: 6px;">Ringkasan Capaian Pembelajaran UTS</h3>
+        <p style="font-size: 9.5pt; color: #475569; line-height: 1.55;">
+          Melalui pengerjaan tugas proyek UTS Pemrograman Web 1 ini, beberapa kompetensi penting berhasil dicapai:<br>
+          1. <strong>Pemahaman Semantik:</strong> Mampu merancang struktur web standar HTML5 yang rapi dan mudah diindeks.<br>
+          2. <strong>Penyajian Data Berstruktur:</strong> Mampu membuat tabel HTML yang fungsional dan dipercantik dengan CSS.<br>
+          3. <strong>Desain Antarmuka Modern:</strong> Menguasai Flexbox, CSS Grid, responsivitas media queries, dan visual kontemporer.<br>
+          4. <strong>Version Control & Deployment:</strong> Menguasai Git, GitHub, serta publikasi website melalui GitHub Pages.
+        </p>
+      </div>
+
+      <div class="card-grid" style="margin-top: 8px;">
+        <div class="mini-card" style="text-align: center; padding: 14px;">
+          <div style="font-size: 24pt; margin-bottom: 4px;">💬</div>
+          <h4 style="justify-content: center; font-size: 11pt;">Sesi Tanya Jawab (Q&A)</h4>
+          <p style="font-size: 8.5pt;">Siap menerima pertanyaan seputar struktur tag, teknik CSS, atau demo langsung website.</p>
+        </div>
+        <div class="mini-card" style="text-align: center; padding: 14px;">
+          <div style="font-size: 24pt; margin-bottom: 4px;">🎓</div>
+          <h4 style="justify-content: center; font-size: 11pt;">Identitas Mahasiswa</h4>
+          <p style="font-size: 8.5pt;"><strong>Muhamad Endang</strong><br>Sistem Informasi - Universitas Pamulang</p>
+        </div>
+      </div>
+
+      <div class="speech-box" style="margin-top: auto; background: #f0fdf4; border-color: #86efac;">
+        <div class="speech-label" style="background: #16a34a;">🎤 Naskah Penutup (Ucapkan di Akhir Presentasi)</div>
+        <p style="color: #14532d;">
+          "Sebagai kesimpulan, website <strong>Endang Microtech</strong> ini telah memenuhi seluruh kriteria penilaian tugas UTS Pemrograman Web 1, mulai dari penerapan tag semantik, penyajian tabel harga bergaris yang rapi, arsitektur multi-page, styling Vanilla CSS yang modern dan responsif, hingga struktur folder gambar yang rapi dan deployment online.<br><br>
+          Demikian pemaparan presentasi proyek UTS dari saya. Saya sangat terbuka untuk menerima saran, masukan, maupun pertanyaan dari Bapak/Ibu Dosen dan rekan-rekan sekalian guna penyempurnaan proyek ini ke depannya.<br><br>
+          Kurang lebihnya saya mohon maaf. Terima kasih banyak atas perhatiannya.<br>
+          <strong>Wabillahi taufiq wal hidayah, Wassalamu’alaikum Warahmatullahi Wabarakatuh.</strong>"
+        </p>
+      </div>
+    </div>
+
+    <div class="doc-footer">
+      <span>UTS Pemrograman Web 1 - Muhamad Endang (Sistem Informasi UNPAM)</span>
+      <span>Halaman 6 dari 6 (Selesai)</span>
+    </div>
+  </div>
+
+</body>
+</html>
